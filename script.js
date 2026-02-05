@@ -3,25 +3,45 @@ const yesBtn = document.getElementById('yesBtn');
 const mainCard = document.getElementById('main-card');
 const successMsg = document.getElementById('success-msg');
 
-function moveButton() {
-    // Viewport dimensions
-    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+function moveButtonSafely() {
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
 
-    const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
+    const padding = 20;       // screen edge padding
+    const safeDistance = 100; // minimum distance from YES button
 
-    noBtn.style.left = randomX + 'px';
-    noBtn.style.top = randomY + 'px';
+    const maxX = window.innerWidth - btnWidth - padding;
+    const maxY = window.innerHeight - btnHeight - padding;
+
+    const yesRect = yesBtn.getBoundingClientRect();
+
+    let x, y;
+    let attempts = 0;
+
+    do {
+        x = Math.random() * maxX;
+        y = Math.random() * maxY;
+        attempts++;
+    } while (
+        Math.abs(x - yesRect.left) < safeDistance &&
+        Math.abs(y - yesRect.top) < safeDistance &&
+        attempts < 50
+    );
+
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
 }
 
-// Mobile and Desktop listeners
-noBtn.addEventListener('mouseover', moveButton);
-noBtn.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    moveButton();
+// Desktop + Mobile + Infinite escape
+['mouseover', 'pointerenter', 'touchstart', 'click'].forEach(event => {
+    noBtn.addEventListener(event, (e) => {
+        e.preventDefault();
+        moveButtonSafely();
+    });
 });
 
+// YES button logic
 yesBtn.addEventListener('click', () => {
     mainCard.classList.add('hidden');
     successMsg.classList.remove('hidden');
