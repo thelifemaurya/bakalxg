@@ -4,14 +4,15 @@ const mainCard = document.getElementById("main-card");
 const successMsg = document.getElementById("success-msg");
 
 function moveNoButton() {
-  const btnWidth = noBtn.offsetWidth;
-  const btnHeight = noBtn.offsetHeight;
+  const btnW = noBtn.offsetWidth;
+  const btnH = noBtn.offsetHeight;
+  const padding = 12;
+  const safeGap = 120;
 
-  const padding = 15;
   const yesRect = yesBtn.getBoundingClientRect();
 
-  const maxX = window.innerWidth - btnWidth - padding;
-  const maxY = window.innerHeight - btnHeight - padding;
+  const maxX = window.innerWidth - btnW - padding;
+  const maxY = window.innerHeight - btnH - padding;
 
   let x, y;
 
@@ -19,16 +20,16 @@ function moveNoButton() {
     x = Math.random() * maxX;
     y = Math.random() * maxY;
   } while (
-    Math.abs(x - yesRect.left) < 120 &&
-    Math.abs(y - yesRect.top) < 120
+    Math.abs(x - yesRect.left) < safeGap &&
+    Math.abs(y - yesRect.top) < safeGap
   );
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
 }
 
-// escape forever 😈
-["mouseover", "touchstart", "pointerenter"].forEach(evt => {
+// NO button escape forever 😈
+["mouseover", "pointerenter", "touchstart"].forEach(evt => {
   noBtn.addEventListener(evt, e => {
     e.preventDefault();
     moveNoButton();
