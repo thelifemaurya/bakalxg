@@ -1,16 +1,28 @@
-function moveButton() {
-    const container = document.getElementById('main-card');
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const mainCard = document.getElementById("main-card");
+const successMsg = document.getElementById("success-msg");
 
-    const containerRect = container.getBoundingClientRect();
-    const btnRect = noBtn.getBoundingClientRect();
+function moveNoButton() {
+  const container = document.querySelector(".container");
 
-    const maxX = containerRect.width - btnRect.width - 10;
-    const maxY = containerRect.height - btnRect.height - 10;
+  const maxX = container.offsetWidth - noBtn.offsetWidth;
+  const maxY = container.offsetHeight - noBtn.offsetHeight;
 
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
-    noBtn.style.position = "absolute";
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 }
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+noBtn.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  moveNoButton();
+});
+
+yesBtn.addEventListener("click", () => {
+  mainCard.classList.add("hidden");
+  successMsg.classList.remove("hidden");
+});
