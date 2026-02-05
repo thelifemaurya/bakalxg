@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Sacramento&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffe9e9 0%, #ffc1cc 100%);
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 85%;
+    max-width: 400px;
+    border: 2px solid white;
+}
+
+.main-gif { width: 140px; margin-bottom: 15px; }
+
+.highlight { font-weight: 600; color: #d63384; font-size: 1.1rem; }
+
+.question {
+    font-family: 'Sacramento', cursive;
+    font-size: 2.5rem;
+    color: #b91d47;
+    margin: 15px 0;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    height: 50px;
+}
+
+.btn {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.yes-btn { background: #ff4d6d; color: white; }
+
+.no-btn {
+    background: white;
+    color: #ff4d6d;
+    position: absolute;
+    z-index: 1000;
+}
+
+.success-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff0f3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    overflow-y: auto;
+    z-index: 2000;
+}
+
+.poem-box {
+    max-width: 500px;
+    line-height: 1.6;
+    color: #444;
+    font-size: 0.95rem;
+    animation: fadeIn 1.5s;
+}
+
+.hidden { display: none !important; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
